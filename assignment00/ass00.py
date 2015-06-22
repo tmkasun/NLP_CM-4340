@@ -1,3 +1,4 @@
+# coding=utf-8
 __author__ = 'tmkasun'
 
 
@@ -7,6 +8,10 @@ def main():
     rot13_decoder("nopqrst uvwxyza bcdefg hij klm @#$%^&*")
 
     rot13_decoder("Pnrfnepvcre? V zhpucersrePnrfnefnynq!")
+
+    word_list = ["car", "train", "bicycle", "motorcycle", "van", "airplane", "boat"]
+    longest_word = find_longest_word(word_lengths, word_list)
+    print("Longest word in {} list is {}({})".format(word_list, longest_word, len(longest_word)))
 
 
 def pvt_max(number1, number2):
@@ -61,12 +66,26 @@ def rot13_decoder(message):
 
 
 def word_lengths(word_list):
-    word_lengths_list = [len(word) for word in word_list] # Python list comprehension
+    word_lengths_list = [len(word) for word in word_list]  # Python list comprehension
     return word_lengths_list
 
 
-def find_longest_word(word_lengths, words_list):
-    return sorted(word_lengths(words_list))[-1]
+def func(text):
+    """
+    A hapax legomenon (/ˈhæpəks lɨˈɡɒmɨnɒn/ also /ˈhæpæks/ or /ˈheɪpæks/;[1][2] pl. hapax legomena;
+    sometimes abbreviated to hapax, pl. hapaxes) is a word that occurs only once within a context,
+    either in the written record of an entire language, in the works of an author, or in a single text.
+    The term is sometimes incorrectly used to describe a word that occurs in just one of an author's works,
+    even though it occurs more than once in that work. Hapax legomenon is a transliteration of Greek ἅπαξ λεγόμενον,
+    meaning "(something) said (only) once"
+    """
+    with open(u'./madolduwa.txt','r') as text_file:
+        for lines in text_file:
+            print(lines)
+
+
+def find_longest_word(word_length_calculator, words_list):
+    return sorted(words_list, key=word_length_calculator)[-1]
 
 
 if __name__ == '__main__':
