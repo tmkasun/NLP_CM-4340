@@ -1,5 +1,6 @@
 # coding=utf-8
 __author__ = 'tmkasun'
+import re
 
 
 def main():
@@ -11,9 +12,10 @@ def main():
 
     word_list = ["car", "train", "bicycle", "motorcycle", "van", "airplane", "boat"]
     longest_word = find_longest_word(word_lengths, word_list)
-    print("Longest word in {} list is {}({})".format(word_list, longest_word, len(longest_word)))
+    print("DEBUG: Longest word in {} list is {}({})".format(word_list, longest_word, len(longest_word)))
 
-    hapax(u'./madolduwa.txt')
+    hapax_list = hapax(u'./madolduwa.txt')
+    print("DEBUG: Hapax words({}) in text = {}".format(len(hapax_list), hapax_list))
 
 
 def pvt_max(number1, number2):
@@ -87,17 +89,26 @@ def hapax(text_file):
 
     In Unix systems : " tr -sc 'A-Za-z' '\n' < madolduwa.txt | tr 'A-Z' 'a-z' | grep 'ing$' | sort | uniq -c "
     """
+    pattern = re.compile(r'[^A-Za-z]+')
     word_count = {}
     with open(text_file, 'r') as text_file:
         for lines in text_file:
             for word in lines.split(' '):
-                word = word.strip()  # TODO: use re.compiler instead
+                word = re.sub(pattern, '', word)
+                word = word.lower()
                 if word not in word_count:
                     word_count[word] = 1
                 else:
                     word_count[word] += 1
-        print(word_count)
     text_file.close()
+    hapax_list = []
+    for word, count in word_count.items():
+        if count is 1:
+            hapax_list.append(word)
+
+    # word or can use the import operator
+    # sorted_dict = sorted(word_count.items(),key=operator.itemgetter(1))
+    return hapax_list
 
 
 if __name__ == '__main__':
