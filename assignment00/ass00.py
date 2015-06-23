@@ -72,6 +72,10 @@ def word_lengths(word_list):
     return word_lengths_list
 
 
+def find_longest_word(word_length_calculator, words_list):
+    return sorted(words_list, key=word_length_calculator)[-1]
+
+
 def hapax(text_file):
     """
     A hapax legomenon (/ˈhæpəks lɨˈɡɒmɨnɒn/ also /ˈhæpæks/ or /ˈheɪpæks/; pl. hapax legomena;
@@ -94,10 +98,6 @@ def hapax(text_file):
                     word_count[word] += 1
         print(word_count)
     text_file.close()
-
-
-def find_longest_word(word_length_calculator, words_list):
-    return sorted(words_list, key=word_length_calculator)[-1]
 
 
 if __name__ == '__main__':
