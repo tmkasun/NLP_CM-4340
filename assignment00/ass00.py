@@ -13,6 +13,8 @@ def main():
     longest_word = find_longest_word(word_lengths, word_list)
     print("Longest word in {} list is {}({})".format(word_list, longest_word, len(longest_word)))
 
+    hapax(u'./madolduwa.txt')
+
 
 def pvt_max(number1, number2):
     if number1 > number2:
@@ -70,18 +72,28 @@ def word_lengths(word_list):
     return word_lengths_list
 
 
-def func(text):
+def hapax(text_file):
     """
-    A hapax legomenon (/ˈhæpəks lɨˈɡɒmɨnɒn/ also /ˈhæpæks/ or /ˈheɪpæks/;[1][2] pl. hapax legomena;
+    A hapax legomenon (/ˈhæpəks lɨˈɡɒmɨnɒn/ also /ˈhæpæks/ or /ˈheɪpæks/; pl. hapax legomena;
     sometimes abbreviated to hapax, pl. hapaxes) is a word that occurs only once within a context,
     either in the written record of an entire language, in the works of an author, or in a single text.
     The term is sometimes incorrectly used to describe a word that occurs in just one of an author's works,
     even though it occurs more than once in that work. Hapax legomenon is a transliteration of Greek ἅπαξ λεγόμενον,
     meaning "(something) said (only) once"
+
+    In Unix systems : " tr -sc 'A-Za-z' '\n' < madolduwa.txt | tr 'A-Z' 'a-z' | grep 'ing$' | sort | uniq -c "
     """
-    with open(u'./madolduwa.txt','r') as text_file:
+    word_count = {}
+    with open(text_file, 'r') as text_file:
         for lines in text_file:
-            print(lines)
+            for word in lines.split(' '):
+                word = word.strip()  # TODO: use re.compiler instead
+                if word not in word_count:
+                    word_count[word] = 1
+                else:
+                    word_count[word] += 1
+        print(word_count)
+    text_file.close()
 
 
 def find_longest_word(word_length_calculator, words_list):
