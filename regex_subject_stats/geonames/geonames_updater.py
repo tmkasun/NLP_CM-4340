@@ -59,8 +59,8 @@ debugObject = None
 
 
 def main():
-    fileName = 'LK.txt'
-    dataBase = 'lk_test'
+    fileName = './LK/LK.txt'
+    dataBase = 'geonames_lk'
     print "Start inserting data from {} file to {} database......".format(fileName, dataBase)
     geoNames = getGeoNameFile(fileName)
     recordsCount = 0
