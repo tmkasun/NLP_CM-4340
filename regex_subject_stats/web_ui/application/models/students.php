@@ -17,7 +17,7 @@ class Students extends CI_Model
     }
 
     function all(){
-        $cursor = $this->uni_db->students->find(array('location' => array('$exists' => true )) ,array('reg_number' => 1, '_id'=> false, 'name' => 1, 'location.location' => 1));
+        $cursor = $this->uni_db->students->find(array('location' => array('$ne' => false )) ,array('reg_number' => 1, '_id'=> false, 'name' => 1, 'location.location' => 1));
         /*db.history.find({id: 14,'properties.timeStamp': {"$lte": Date()}}).count()*/
         $data= array();
         foreach ($cursor as $doc) {
