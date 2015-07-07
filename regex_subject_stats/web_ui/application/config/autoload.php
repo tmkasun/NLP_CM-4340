@@ -110,7 +110,7 @@ $autoload['language'] = array();
 */
 
 $autoload['model'] = array('log_dao');
-$autoload['libraries'] = array_merge(array($autoload['libraries'],'websocket','sms','Codei_Composer'));
+$autoload['libraries'] = array_merge(array($autoload['libraries'],'Codei_Composer'));
 
 
 /* End of file autoload.php */

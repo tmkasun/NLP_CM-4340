@@ -99,21 +99,6 @@ class Testing extends CI_Controller
         phpinfo();
     }
 
-
-    function send()
-    {
-        $sms = new Sms("Testing message");
-        $sent = $sms->send("0711661919", "Testing sms from system!");
-        var_dump($sent);
-    }
-
-    function webSocket($destination)
-    {
-        $webSocket = new Websocket('localhost', '5555', 'testingId');
-        $response = $webSocket->send("Testing websocket message", $destination);
-        var_dump($response);
-    }
-
     function nextId($name)
     {
         print_r($this->counters_dao->getNextId($name));
