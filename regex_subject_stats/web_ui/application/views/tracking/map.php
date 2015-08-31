@@ -66,7 +66,7 @@
     <script>
 
         function accepted () {
-            $.get('http://bigdata.knnect.local/index.php/Vehicle_tracking/all_students', function (data) {
+            $.get('http://bigdata.knnect.local/index.php/vehicle_tracking/all_students', function (data) {
 
                 for (var student of data )
                 {
@@ -82,7 +82,7 @@
             student_marker.on('click', function (marker) {
                 var reg_number = marker.target.reg_number;
 
-                $.get('http://bigdata.knnect.local/index.php/Vehicle_tracking/get_student/'+reg_number, function (data) {
+                $.get('http://bigdata.knnect.local/index.php/vehicle_tracking/get_student/'+reg_number, function (data) {
                     console.log(data);
                     var popupTemplate = $('#markerPopup');
                     popupTemplate.find('#objectId').html(data.reg_number);
